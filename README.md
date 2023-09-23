@@ -1,11 +1,10 @@
-# Nvim-Configuration
+# Dotfiles
 
-Files in this repository :
+## Files
 
-| File name                                  | File description |
-| ------------------------------------------ | ---------------- |
-| [01 Nvim+Nvchad.md](01 Nvim+Nvchad.md)     |                  |
-| [02 Nvim+Snippets.md](02 Nvim+Snippets.md) |                  |
-| [03 Nvim+Latex.md](03 Nvim+Latex.md)       |                  |
+| Folder      | Last update                        |
+| ----------- | ---------------------------------- |
+| nvim.backup | **23 September, 2023**, *Shanghai* |
+| nvim        |                                    |
+|             |                                    |
 
-**Brandon Lin**, *September 19, 2023*, Shanghai

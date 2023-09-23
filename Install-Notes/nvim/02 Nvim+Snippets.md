@@ -1,4 +1,4 @@
-# Nvim + Snippets
+# Nvim + Snippets (Lua)
 
 > Date : 09.19.2023
 
@@ -72,103 +72,117 @@ Explications :
 - LuaSnip will then load *all* `*.lua` files inside this filetype subdirectory,
 - I have a lot of `tex` snippets, so I prefer to further organize them in a dedicated subdirectory with individual files for LaTeX delimiters, environments, and so on.
 
-### Snippet anatomy
-
-#### Abbreviations used in the LuaSnips docs (\*)
-
- LuaSnip defines a globally-available set of abbreviations for common modules that make writing snippets much easier. 
+### Basic lua file stucture
 
 ```lua
--- Abbreviations used in this article and the LuaSnip docs
-local ls = require("luasnip")
-local s = ls.snippet
-local sn = ls.snippet_node
-local t = ls.text_node
-local i = ls.insert_node
-local f = ls.function_node
-local d = ls.dynamic_node
-local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
-```
-
-
-
-#### Format
-
-You create snippets by specifying:
-
-1. the snippet’s basic parameters (trigger, name, etc.),
-2. the snippet’s nodes, and
-3. possibly some custom expansion conditions and callback functions.
-
-```lua
--- Anatomy of a LuaSnip snippet
-require("luasnip").snippet(
-  snip_params:table,  -- table of snippet parameters
-  nodes:table,        -- table of snippet nodes
-  opts:table|nil      -- *optional* table of additional snippet options
-)
-```
-
-**Setting snippet parameters** :
-
-```lua
+-- Example : all.lua
 return {
-  -- Example: how to set snippet parameters
-  require("luasnip").snippet(
-    { -- Table 1: snippet parameters
-      trig="hi",
-      dscr="An autotriggering snippet that expands 'hi' into 'Hello, world!'",
-      regTrig=false,
-      priority=100,
-      snippetType="autosnippet"
-    },
-    { -- Table 2: snippet nodes (don't worry about this for now---we'll cover nodes shortly)
-      t("Hello, world!"), -- A single text node
-    }
-    -- Table 3, the advanced snippet options, is left blank.
-  ),
-}
-```
-
-**Commun shortcout** : The `trig` key is the only required snippet key.
-
-```lua
-return {
-  -- Shorthand
-  s("hi",  -- LuaSnip expands this to {trig = "hi"}
-    { t("Hello, world!"), }
-  ),
-  -- Here is the equivalent longhand
-  s({trig = "hi"}  -- explicitly setting trigger via params table
-    { t("Hello, world!"), }
-  ),
+    -- insert snnipets here
 }
 ```
 
 ### Actually writing snippets
 
+For more information on the bases of LuaSnipets, click the link in the Reference.
+
+#### Snippet parameters (\*)
+
+- `trig = "..."` (Necessary), Regex expression
+
+- `snippetType = "autosnippet"`
+
 #### Text node
 
 Text nodes insert static text into a snippet. Here are **typical text node use cases**:
 
-- When used on their own, text nodes can transform a short, easy-to-type trigger into a longer, inconvenient-to-type piece of text.
-- When used with other nodes, text nodes provide a template of static boilerplate text into which you dynamically insert variable text with, for example, insert or dynamic nodes.
-
 ```lua
-return {
--- A simple "Hello, world!" text node
-s(
-  {trig = "hi"}, -- Table of snippet parameters
+s({trig = "hi"}, -- Table of snippet parameters
   { -- Table of snippet nodes
     t("Hello, world!")
   }
 ),
-}
 ```
 
+#### Insert node
 
+Insert nodes are positions within a snippet at which you can dynamically type text.
+
+LuaSnip insert nodes are analogous to other snippet engines' tabstops (`$1`, `$2`, etc.).
+
+##### Format
+
+**Format** (**fmt** and **fmta**): a human-friendly syntax for writing snippets.
+
+```lua
+-- Equation
+s({trig="eq", dscr="Expands 'eq' into an equation environment"},
+  fmta(
+     [[
+       \begin{equation*}
+           <>
+       \end{equation*}
+     ]],
+     { i(1) }
+  )
+)
+```
+
+##### Repeated nodes
+
+```lua
+s({trig="env", snippetType="autosnippet"},
+  fmta(
+    [[
+      \begin{<>}
+          <>
+      \end{<>}
+    ]],
+    {
+      i(1),
+      i(2),
+      rep(1),  -- this node repeats insert node i(1)
+    }
+  )
+),
+```
+
+##### Node placeholder text
+
+Description or default text.
+
+```lua
+-- Example use of insert node placeholder text
+s({trig="hr", dscr="The hyperref package's href{}{} command (for url links)"},
+  fmta(
+    [[\href{<>}{<>}]],
+    {
+      i(1, "url"),
+      i(2, "display name"),
+    }
+  )
+),
+```
+
+#### Visual placeholder
+
+#### Context-specific expansion for LaTeX
+
+```lua
+-- Example: expanding a snippet on a new line only.
+-- In a snippet file, first require the line_begin condition...
+local line_begin = require("luasnip.extras.expand_conditions").line_begin
+
+-- ...then add `condition=line_begin` to any snippet's `opts` table:
+return {
+s({trig = "h1", dscr="Top-level section"},
+  fmta(
+    [[\section{<>}]],
+    { i(1) }
+  ), 
+  {condition = line_begin}  -- set condition in the `opts` table
+),
+}
+```
 
 ### Load snippets
 
@@ -180,6 +194,12 @@ Load snippets by calling the LuaSnip Lua loader’s `load` function from somewhe
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})
 ```
 
+## TODO
+
+- [ ] 3.3.4 Visual placeholder
+
 ## References
 
 - [A LuaSnip guide for LaTeX workflows](https://www.ejmastnak.com/tutorials/vim-latex/luasnip/#getting-started)
+
+- [ ] [Snippet reference](https://github.com/ejmastnak/dotfiles/tree/main/config/nvim/LuaSnip/tex)

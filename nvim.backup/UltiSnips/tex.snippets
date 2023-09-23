@@ -1,0 +1,1124 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+
+def comment():
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+
+endglobal
+
+snippet cha "chapter" bA
+\chapter{$1}
+$0
+endsnippet
+
+snippet sec "section" bA
+\section{$1}
+$0
+endsnippet
+
+snippet sse "subsection" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet sss "subsection" bA
+\subsubsection{$1}
+$0
+endsnippet
+
+snippet temp "templatenote" b
+\documentclass{article}
+
+\usepackage{sidenotes}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhead{} % 初始化页眉
+\fancyhead[R]{\textsl{\rightmark}}
+\fancyhead[L]{\textsl{\leftmark}}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Théorème,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=Propriété,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightOrange}
+
+\declaretheoremstyle[name=Définition,]{defisty}
+\declaretheorem[style=defisty,numberlike=theorem]{definition}
+\tcolorboxenvironment{definition}{colback=LightGreen}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+\newgeometry{top=20mm,bottom=25mm,right=30mm,left=30mm}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+        \\\\ [2.0cm]
+        \HRule{1.5pt} \
+        \LARGE \textbf{\uppercase{${1:Input head title here}}
+        \HRule{2.0pt} \\\\ [0.6cm] \LARGE{${2:Input second head title here}} \vspace*{10\baselineskip}}
+        }
+\date{\today}
+\author{\textbf{Author} \ 
+        Brandon Lin}
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+
+$0
+
+% ------------------------------------------------------------------------------
+
+\end{document}
+endsnippet
+
+snippet note2 "template" bA
+%!TEX program = xelatex
+\documentclass[cn,hazy,blue,11pt,normal]{elegantnote}
+\title{${1:Title}}
+
+\author{林楠}
+\institute{Shanghai Jiao Tong University}
+
+\date{\zhtoday}
+
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+
+$0
+
+%\printbibliography[heading=bibintoc, title=\ebibname]
+
+%-------------------------------------------------------------
+%-- End here!                          |
+%------>------>------>------>------>------>------>------>--> |
+\end{document}
+
+endsnippet
+
+snippet beam "beamer" bA
+%\documentclass{beamer}
+\documentclass[handout]{beamer}
+%\usetheme{Copenhagen}
+%\usetheme{Boadilla}
+\usetheme{Madrid}
+\usepackage{sansmathaccent}
+\pdfmapfile{+sansmathaccent.map}
+\usepackage{amsthm}
+\usepackage{color}
+
+%\usepackage[margin=1.2in]{geometry}
+\usepackage{graphpap}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{subfigure}
+%\usepackage{pst-all}
+\usepackage{pst-poly}
+\usepackage{multido}
+\usepackage{dsfont}
+\input{random.tex}
+%\usepackage{newclude}
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{automata,arrows,positioning,calc}
+
+\usepackage[thinlines]{easytable} 
+\usepackage{amsthm} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{pgfplots}
+
+
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{prop}[theorem]{Proposition}
+
+\font\eightrm=cmr8
+\font\fiverm=cmr5
+\newcommand{\scrC}{\mathcal{C}}
+\newcommand{\scrF}{\mathcal{F}}
+\newcommand{\scrG}{\mathcal{G}}
+\newcommand{\scrN}{\mathcal{N}}
+\newcommand{\scrT}{\mathcal{T}}
+\newcommand{\scrX}{\mathcal{X}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rd}{\mathbb{R}^d}
+\newcommand{\afterproof}{\bigskip}
+\newcommand{\lemmaskip}{\medskip}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Pro}{\mathbb{P}}
+\newcommand{\Jac}{\mathrm{J}}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\BR}{\text{B\hspace{-0.02cm}R}}
+\newcommand{\NE}{\text{N\hspace{-0.001cm}E}}
+\newcommand{\Nodd}{\N^{\text{odd}}}
+\newcommand{\Neven}{\N^{\text{even}}}
+\newcommand{\ABR}{\text{A\hspace{-0.02cm}B\hspace{-0.02cm}R}}
+\newcommand{\ANE}{\text{A\hspace{-0.02cm}N\hspace{-0.02cm}E}}
+\newcommand{\beq}{\begin{equation*}}
+\newcommand{\eeq}{\end{equation*}}
+\newcommand{\head}[1]
+{\markright{\hbox to 0pt{\vtop to 0pt{\hbox{}\vskip 3mm \hrule width
+\textwidth \vss} \hss}{\sc #1}}}
+
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+
+
+\begin{document}
+
+%%% --- Enter Title here --- %%%
+\title{${1:Title}}  
+
+%%% --- Change the author here --- %%%
+\author[Brandon Lin] 
+{   }
+ 
+\institute[SJTU] 
+{
+  \inst{}
+ 
+	}
+
+%%% --- Enter a second-title here --- %%%
+\date[\today] % (optional)
+{${2:Second-Title}}
+
+
+\begin{frame}
+\titlepage
+\begin{center}
+%%% --- Enter a third-title here --- %%%
+
+$3
+\today
+\end{center}
+\end{frame}
+
+%%% --- Main Part --- %%%
+% Add a new page between \begin{frame}[t]{title} ... \end{frame} %
+% Add a new block between \begin{block}{title} ... \end{block} %
+
+$0
+%%% --- End --- %%
+\end{document}
+endsnippet
+
+snippet fig "Latex figure" bA
+\begin{figure}[H] %h:当前位置, t:顶部, b:底部, p:浮动页
+	\centering
+	\includegraphics[width=0.8\textwidth]{./assets/${1}.png}
+	\caption{$1}
+	\label{fig:${1/\W+/-/g}}
+\end{figure}
+
+$0
+endsnippet
+
+snippet twofig "Two Figures" bA
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=${3:2.0}in]{./fig/${1}.png}
+\caption{$1}
+\label{fig:${1/\W+/-/g}}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=${4:2.0}in]{./fig/${2}.png}
+\caption{$2}
+\label{fig:${2/\W+/-/g}}
+\end{minipage}
+\end{figure}
+endsnippet
+
+snippet bx "tcolorbox" b
+\begin{tcolorbox}[title={$1}, colback=black!5!white,colframe=black!75!black, fonttitle = \bfseries \sffamily]
+	$0
+\end{tcolorbox}
+endsnippet
+
+snippet bxb "tcolorbox" bA
+\begin{tcolorbox}[title={$1}, colback=blue!5!white,colframe=blue!75!black, fonttitle = \bfseries \sffamily]
+	$0
+\end{tcolorbox}
+endsnippet
+
+snippet bxr "tcolorbox" bA
+\begin{tcolorbox}[title={$1}, colback=red!5!white,colframe=red!75!black, fonttitle = \bfseries \sffamily]
+	$0
+\end{tcolorbox}
+endsnippet
+
+snippet beg "begin{} / end{}" bA
+\\begin{$1}
+	$0
+\\end{$1}
+endsnippet
+
+priority 100
+snippet ... "ldots" iA
+\ldots
+endsnippet
+
+snippet table "Table environment" b
+\begin{table}[${1:htpb}]
+	\centering
+	\caption{${2:caption}}
+	\label{tab:${3:label}}
+	\begin{tabular}{${5:c}}
+	$0${5/((?<=.)c|l|r)|./(?1: & )/g}
+	\end{tabular}
+g\end{table}
+endsnippet
+
+snippet enum "Enumerate" bA
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+snippet item "Itemize" bA
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+snippet desc "Description" b
+\begin{description}
+	\item[$1] $0
+\end{description}
+endsnippet
+
+snippet pac "Package" b
+\usepackage[${1:options}]{${2:package}}$0
+endsnippet
+
+snippet => "implies" Ai
+\implies
+endsnippet
+
+snippet =< "implied by" Ai
+\impliedby
+endsnippet
+
+context "math()"
+snippet iff "iff" Ai
+\iff
+endsnippet
+
+snippet mk "Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
+endsnippet
+
+snippet dm "Math" wA
+\[
+${1:${VISUAL}}
+\]
+$0
+endsnippet
+
+snippet ali "Align" bA
+\begin{align*}
+	${1:${VISUAL}}
+\end{align*}
+endsnippet
+
+
+context "math()"
+snippet // "Fraction" iA
+\\frac{$1}{$2} $0
+endsnippet
+
+snippet / "Fraction" i
+\\frac{${VISUAL}}{$1} $0
+endsnippet
+
+context "math()"
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1} $0
+endsnippet
+
+priority 1000
+context "math()"
+snippet '^.*\)/' "() frac" wrA
+`!p
+stripped = match.string[:-1]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i-=1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+
+snippet sympy "sympyblock " w
+sympy $1 sympy$0
+endsnippet
+
+priority 10000
+snippet 'sympy(.*)sympy' "sympy" wr
+`!p
+from sympy import *
+x, y, z, t = symbols('x y z t')
+k, m, n = symbols('k m n', integer=True)
+f, g, h = symbols('f g h', cls=Function)
+init_printing()
+snip.rv = eval('latex(' + match.group(1).replace('\\', '').replace('^', '**').replace('{', '(').replace('}', ')') + ')')
+`
+endsnippet
+
+priority 1000
+snippet math "mathematicablock" w
+math $1 math$0
+endsnippet
+
+priority 10000
+snippet 'math(.*)math' "math" wr
+`!p
+import subprocess
+code = match.group(1)
+code = 'ToString[' + code + ', TeXForm]'
+snip.rv = subprocess.check_output(['wolframscript', '-code', code])
+`
+endsnippet
+
+snippet \\ "newline" i
+\hspace*{\fill}
+endsnippet
+
+snippet == "equals" iA
+&= $1 \\\\
+endsnippet
+
+snippet != "equals" iA
+\neq 
+endsnippet
+
+context "math()"
+snippet ceil "ceil" iA
+\left\lceil $1 \right\rceil $0
+endsnippet
+
+context "math()"
+snippet floor "floor" iA
+\left\lfloor $1 \right\rfloor$0
+endsnippet
+
+snippet pmat "pmat" iA
+\begin{pmatrix} $1 \end{pmatrix} $0
+endsnippet
+
+snippet bmat "bmat" iA
+\begin{bmatrix} $1 \end{bmatrix} $0
+endsnippet
+
+context "math()"
+snippet () "left( right)" iA
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr "left( right)" i
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr( "left( right)" i
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+snippet lr| "left| right|" i
+\left| ${1:${VISUAL}} \right| $0
+endsnippet
+
+snippet lr{ "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+snippet lrb "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+snippet lr[ "left[ right]" i
+\left[ ${1:${VISUAL}} \right] $0
+endsnippet
+
+snippet lra "leftangle rightangle" iA
+\left<${1:${VISUAL}} \right>$0
+endsnippet
+
+context "math()"
+snippet conj "conjugate" iA
+\overline{$1}$0
+endsnippet
+
+snippet sum "sum" w
+\sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
+endsnippet
+
+snippet taylor "taylor" w
+\sum_{${1:k}=${2:0}}^{${3:\infty}} ${4:c_$1} (x-a)^$1 $0
+endsnippet
+
+snippet lim "limit" w
+\lim_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+snippet limsup "limsup" w
+\limsup_{${1:n} \to ${2:\infty}} 
+endsnippet
+
+snippet prod "product" w
+\prod_{${1:n=${2:1}}}^{${3:\infty}} ${4:${VISUAL}} $0
+endsnippet
+
+snippet part "d/dx" w
+\frac{\partial ${1:V}}{\partial ${2:x}} $0
+endsnippet
+
+context "math()"
+snippet sq "\sqrt{}" iA
+\sqrt{${1:${VISUAL}}} $0
+endsnippet
+
+context "math()"
+snippet sr "^2" iA
+^2
+endsnippet
+
+context "math()"
+snippet cb "^3" iA
+^3
+endsnippet
+
+context "math()"
+snippet td "to the ... power" iA
+^{$1}$0
+endsnippet
+
+context "math()"
+snippet rd "to the ... power" iA
+^{($1)}$0
+endsnippet
+
+snippet __ "subscript" iA
+_{$1}$0
+endsnippet
+
+snippet ooo "\infty" iA
+\infty
+endsnippet
+
+snippet rij "mrij" i
+(${1:x}_${2:n})_{${3:$2}\\in${4:\\N}}$0
+endsnippet
+
+snippet <= "leq" iA
+\le 
+endsnippet
+
+snippet >= "geq" iA
+\ge 
+endsnippet
+
+context "math()"
+snippet EE "geq" iA
+\exists 
+endsnippet
+
+context "math()"
+snippet AA "forall" iA
+\forall 
+endsnippet
+
+context "math()"
+snippet xnn "xn" iA
+x_{n}
+endsnippet
+
+context "math()"
+snippet ynn "yn" iA
+y_{n}
+endsnippet
+
+
+context "math()"
+snippet xii "xi" iA
+x_{i}
+endsnippet
+
+context "math()"
+snippet yii "yi" iA
+y_{i}
+endsnippet
+
+context "math()"
+snippet xjj "xj" iA
+x_{j}
+endsnippet
+
+context "math()"
+snippet yjj "yj" iA
+y_{j}
+endsnippet
+
+context "math()"
+snippet xp1 "x" iA
+x_{n+1}
+endsnippet
+
+context "math()"
+snippet xmm "x" iA
+x_{m}
+endsnippet
+
+snippet R0+ "R0+" iA
+\\R_0^+
+endsnippet
+
+snippet plot "Plot" w
+\begin{center}
+	\begin{tikzpicture}
+	%\node (name) at (pos1, pos2) [label={text1}] {text2};
+	%\draw [option] ...;
+		$0
+	\end{tikzpicture}
+\end{center}
+endsnippet
+
+snippet graph "Graph" w
+\begin{center}
+	\begin{tikzpicture}
+		\tikzstyle{every node}=[draw,shape=circle];
+		%\node (name) at (theta:r) [label={text1}] {text2};
+		%\draw [option] ...
+		%...;
+		\node $1;
+		\draw[ultra thick,->] $2;
+	\end{tikzpicture}
+\end{center}
+
+$0
+endsnippet
+
+snippet nn "Tikz node" w
+\node[$5] (${1/[^0-9a-zA-Z]//g}${2}) ${3:at (${4:0,0}) }{$${1}$};
+$0
+endsnippet
+
+snippet func "Tikz function" w
+\draw[domain=${1}:${2}] plot (${3:\\x}, {$4:expression}) $5
+$0
+endsnippet
+
+context "math()"
+snippet mcal "mathcal" iA
+\mathcal{$1}$0
+endsnippet
+
+snippet lll "l" iA
+\ell
+endsnippet
+
+context "math()"
+snippet nabl "nabla" iA
+\nabla 
+endsnippet
+
+context "math()"
+snippet xx "cross" iA
+\times 
+endsnippet
+
+priority 100
+snippet ** "cdot" iA
+\cdot 
+endsnippet
+
+context "math()"
+snippet norm "norm" iA
+\|$1\|$0
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)(sin|cos|arccot|cot|csc|ln|log|exp|star|perp)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+priority 300
+context "math()"
+snippet dint "integral" wA
+\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
+endsnippet
+
+priority 200
+context "math()"
+snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+
+priority 100
+context "math()"
+snippet -> "to" iA
+\to 
+endsnippet
+
+
+priority 100
+context "math()"
+snippet |-> "mapsto" iA
+\mapsto 
+endsnippet
+
+priority 200
+context "math()"
+snippet <-> "leftrightarrow" iA
+\leftrightarrow
+endsnippet
+
+context "math()"
+snippet !> "mapsto" iA
+\mapsto 
+endsnippet
+
+context "math()"
+snippet invs "inverse" iA
+^{-1}
+endsnippet
+
+context "math()"
+snippet compl "complement" iA
+^{c}
+endsnippet
+
+context "math()"
+snippet \\\ "setminus" iA
+\setminus
+endsnippet
+
+snippet >> ">>" iA
+\gg
+endsnippet
+
+snippet << "<<" iA
+\ll
+endsnippet
+
+
+snippet ~~ "~" iA
+\sim 
+endsnippet
+
+context "math()"
+snippet set "set" wA
+\\{$1\\} $0
+endsnippet
+
+snippet || "mid" iA
+ \mid 
+endsnippet
+
+
+context "math()"
+snippet cc "subset" Ai
+\subset 
+endsnippet
+
+context "math()"
+snippet notin "not in " iA
+\not\in 
+endsnippet
+
+context "math()"
+snippet inn "in " iA
+\in 
+endsnippet
+
+snippet NN "n" iA
+\N
+endsnippet
+
+snippet Nn "cap" iA
+\cap 
+endsnippet
+
+snippet UU "cup" iA
+\cup 
+endsnippet
+
+snippet uuu "bigcup" iA
+\bigcup_{${1:i \in ${2: I}}} $0
+endsnippet
+
+snippet nnn "bigcap" iA
+\bigcap_{${1:i \in ${2: I}}} $0
+endsnippet
+
+
+snippet <! "normal" iA
+\triangleleft 
+endsnippet
+
+snippet <> "hokje" iA
+\diamond 
+endsnippet
+
+
+context "math()"
+snippet '(?<!i)sts' "text subscript" irA
+_\text{$1} $0
+endsnippet
+
+context "math()"
+snippet tt "text" iA
+\text{$1}$0
+endsnippet
+
+context "math()"
+snippet case "cases" wA
+\begin{cases}
+	$1
+\end{cases}
+endsnippet
+
+snippet SI "SI" iA
+\SI{$1}{$2}
+endsnippet
+
+snippet bigfun "Big function" iA
+\begin{align*}
+	$1: $2 &\longrightarrow $3 \\\\
+	$4 &\longmapsto $1($4) = $0
+\end{align*}
+endsnippet
+
+context "math()"
+snippet vec "vector" iA
+\overrightarrow{${1:x}} $0
+endsnippet
+
+context "math()"
+snippet colv "column vector" iA
+\begin{bmatrix} ${1:x}_${2:1}\\\\ ${3:\vdots}\\\\ $1_${2:n} \end{bmatrix}
+endsnippet
+
+priority 10
+context "math()"
+snippet "bar" "bar" ri
+\overline{$1}$0
+endsnippet
+
+priority 10
+context "math()"
+snippet "hbar" "constante de Planck" riA
+\hbar $0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet "hat" "hat" riA
+\hat{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])hat" "hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet letw "let omega" iA
+Let $\Omega \subset \C$ be open.
+endsnippet
+
+
+snippet bb "H" iA
+\mathbb{$1} $0
+endsnippet
+
+
+context "math()"
+snippet rm "D" iA
+\mathrm{$1} $0
+endsnippet
+
+context "math()"
+snippet cal "D" iA
+\mathcal{$1} $0
+endsnippet
+
+context "math()"
+snippet scr "D" iA
+\mathscr{$1} $0
+endsnippet
+
+
+context "math()"
+snippet ps "produit scalaire" i
+\langle $1 | $2 \rangle $0
+endsnippet
+
+
+context "math()"
+snippet norm "produit scalaire" i
+\Vert $1  \Vert $0
+endsnippet
+
+snippet bf "bold face"
+\textbf{$1}$0
+endsnippet
+
+snippet it "italic"
+\textit{$1}$0
+endsnippet
+
+snippet @a "\alpha"
+\alpha $0
+endsnippet
+
+snippet @w "\omega"
+\omega $0
+endsnippet
+
+snippet @b "\beta"
+\beta $0
+endsnippet
+
+snippet @e "\varepsilon"
+\varepsilon $0
+endsnippet
+
+snippet @g "gamma"
+\gamma $0
+endsnippet
+
+snippet @d "delta"
+\delta $0
+endsnippet
+
+snippet @l "lambda"
+\lambda $0
+endsnippet
+
+snippet @ee "\eta"
+\eta $0
+endsnippet
+
+snippet mm "\mu"
+\mu $0
+endsnippet
+
+snippet tt "\tai"
+\tau $0
+endsnippet
+
+snippet pp "\varphi"
+\varphi $0
+endsnippet
+
+snippet oo "\omega"
+\omega $0
+endsnippet
+
+snippet DD "\Delta"
+\Delta $0
+endsnippet
+# vim:ft=snippets
+
+snippet <> "<...>"
+\langle $1 \rangle $0
+endsnippet
+
+snippet red "change color"
+{\color{red} $1}$0
+endsnippet
+
+snippet blue "change color"
+{\color{blue} $1}$0
+endsnippet
+
+snippet frame "insert frame" iA
+\begin{frame}[t]{$1}
+	$0
+\end{frame}
+endsnippet
+
+snippet block "insert block" iA
+\begin{block}{$1}
+	$0
+\end{block}
+endsnippet
+
+snippet dfn "definition" i
+\begin{Definition}[colbacktitle=red!75!black]{${1:title}}{}
+$0
+\end{Definition}
+endsnippet
+
+snippet thm "theorem" i
+\begin{Theorem}{${1:title}}{}
+$0
+\end{Theorem}
+endsnippet
+
+snippet cor "corollary" i
+\begin{Corollary}{${1:title}}{}
+$0
+\end{Corollary}
+endsnippet
+
+
+snippet len "lenma" iA
+\begin{Lenma}{${1:title}}{}
+$0
+\end{Lenma}
+endsnippet
+
+
+snippet prop "proposition" i
+\begin{Prop}{${1:title}}{}
+$0
+\end{Prop}
+endsnippet
+
+snippet clm "claim" i
+\begin{claim}{${1:title}}{}
+$0
+\end{claim}
+endsnippet
+
+snippet ex "example" i
+\begin{Example}{${1:title}}{}
+$0
+\end{Example}
+endsnippet
+
+
+snippet qs "question" i
+\begin{question}{${1:title}}{}
+$0
+\end{question}
+endsnippet
+
+
+snippet proof "proof" i
+\begin{myproof}
+$0
+\end{myproof}
+endsnippet
+
+snippet note "note" i
+\begin{note}
+$0
+\end{note}
+endsnippet
+
+
+snippet code "code" i
+\begin{lstlisting}
+$1
+\end{lstlisting}
+
+$0
+endsnippet
+
+snippet cd "code" i
+\verb|$1| $0
+endsnippet

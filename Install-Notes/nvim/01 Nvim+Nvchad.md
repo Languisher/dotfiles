@@ -7,6 +7,7 @@
 ### From the very begining ...
 
 - Install `nvim`
+
 - Install font : `ttf-jetbrains-mono-nerd` ([Github link](https://github.com/ryanoasis/nerd-fonts))
 
 ### Remove previous nvim settings
