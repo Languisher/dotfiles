@@ -25,7 +25,8 @@
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "workbench.colorTheme": "Tokyo Night",
-    "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace",
+    // Prerequist for next line: download JetBrains Mono font, the last font is to support the oh-my-zsh plugin.
+    "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace, JetBrainsMono Nerd Font Mono",
     "editor.fontLigatures": true,
     "workbench.iconTheme": "material-icon-theme",
     // "editor.lineHeight": 28,
@@ -49,5 +50,6 @@
                 "workbench.action.toggleActivityBarVisibility",
             ]
         }
-    ]
+    ],
+    "workbench.activityBar.location": "hidden"
 }
