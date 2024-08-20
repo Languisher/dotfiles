@@ -16,11 +16,6 @@
         "when": "editorFocus"
     },
     {
-        "key": "cmd+p",
-        "command": "workbench.action.showCommands"
-        // replace the original command: Type in > in default
-    },
-    {
         "key": "cmd+o",
         "command": "workbench.action.quickOpen"
     },

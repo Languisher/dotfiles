@@ -29,7 +29,7 @@
     "editor.fontLigatures": true,
     "workbench.iconTheme": "material-icon-theme",
     // "editor.lineHeight": 28,
-    // "editor.fontSize": 16,
+    "editor.fontSize": 16,
     "material-icon-theme.hidesExplorerArrows": true,
     "workbench.colorCustomizations": {
         "[Tokyo Night]": {
