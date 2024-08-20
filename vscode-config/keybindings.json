@@ -1,0 +1,56 @@
+// Place your key bindings in this file to override the defaults
+// Insipired by https://grafikart.fr/tutoriels/vscode-settings-2096
+[
+    {
+        "key": "alt+1",
+        "command": "multiCommand.makeRoom"
+    },
+    {
+        "key": "cmd+d",
+        "command": "editor.action.smartSelect.expand",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+shift+d",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+p",
+        "command": "workbench.action.showCommands"
+        // replace the original command: Type in > in default
+    },
+    {
+        "key": "cmd+o",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "cmd+shift+o",
+        "command": "revealFileInOS"
+    },
+    {
+        "key": "cmd+r",
+        "command": "workbench.action.gotoSymbol"
+    },
+    {
+        "key": "cmd+n",
+        "command": "explorer.newFile"
+    },
+    {
+        "key": "cmd+alt+l",
+        "command": "editor.action.formatDocument"
+    },
+    {
+        "key": "cmd+t",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "cmd+k",
+        "command": "workbench.view.scm"
+    },
+    {
+        "key": "alt+1",
+        "command": "multiCommand.makeRoom",
+        "when": "view.workbench.scm.visible"
+    }
+]
