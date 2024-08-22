@@ -25,7 +25,6 @@
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "workbench.colorTheme": "Tokyo Night",
-    // Prerequist for next line: download JetBrains Mono font, the last font is to support the oh-my-zsh plugin.
     "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace, JetBrainsMono Nerd Font Mono",
     "editor.fontLigatures": true,
     "workbench.iconTheme": "material-icon-theme",
@@ -50,6 +49,11 @@
                 "workbench.action.toggleActivityBarVisibility",
             ]
         }
-    ],
-    "workbench.activityBar.location": "hidden"
+    ]
+
+    // Vim-AutoSwitch ZH/EN Input
+    "vim.autoSwitchInputMethod.enable": true,
+    "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.US",
+    "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/local/bin/im-select",
+    "vim.autoSwitchInputMethod.switchIMCmd": "/usr/local/bin/im-select {im}"
 }
