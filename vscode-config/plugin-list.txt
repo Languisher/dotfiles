@@ -1,8 +1,0 @@
-Recommend Plugin List:
-    Tokyo Night
-    multi-command
-    Material Icon Theme
-    GitLens - Git supercharged
-    (Optional) Prettier - Code formatter
-    (Optional) Error Lens
-    (Optional) Vim
