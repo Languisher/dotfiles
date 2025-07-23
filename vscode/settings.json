@@ -1,59 +1,92 @@
 {
-    // Insipired by https://grafikart.fr/tutoriels/vscode-settings-2096
-    // "window.zoomLevel": 2,
+    "window.zoomLevel": 0, // Permet de zoomer, pratique si vous faites une présentation
+  
+    // Apparence
+    // -- Editeur
+    "workbench.startupEditor": "none", // On ne veut pas une page d'accueil chargée
     "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    // -- Sidebar
+    "workbench.tree.indent": 15, // Indente plus pour plus de clarté dans la sidebar
+    "workbench.tree.renderIndentGuides": "always",
+    // -- Code
+    "editor.occurrencesHighlight": "off", 
+    "editor.renderWhitespace": "trailing", // On ne veut pas laisser d'espace en fin de ligne
+  
+    // Thème
+    "editor.fontFamily": "'JetBrains Mono', 'MesloLGS NF', 'Fira Code', 'Operator Mono Lig', monospace",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 16,
+    "editor.lineHeight": 28,
+    "workbench.colorTheme": "Cursor Dark Midnight",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorCustomizations": {
+      "[Cursor Dark Midnight]": {
+        "editor.selectionBackground": "#3D59A1",
+        "editor.selectionHighlightBackground": "#3D59A1"
+      },
+    },
+  
+    // Ergonomie
+    "editor.wordWrap": "on",
+    "editor.suggest.insertMode": "replace", // L'autocomplétion remplace le mot en cours
+    "editor.acceptSuggestionOnCommitCharacter": false, // Evite que l'autocomplétion soit accepté lors d'un . par exemple
     "editor.formatOnSave": false,
     "editor.formatOnPaste": false,
-    "editor.renderWhitespace": "trailing",
-    "editor.linkedEditing": true,
-    "editor.occurrencesHighlight": "off",
-    "editor.suggest.insertMode": "replace",
-    "editor.acceptSuggestionOnCommitCharacter": false,
-    "files.autoSave": "onFocusChange", 
-    "files.defaultLanguage": "markdown",
-    "files.exclude": {
-        "**/.git": true,
-        "**/.DS_Store": true,
-    },
+    "editor.linkedEditing": true, // Quand on change un élément HTML, change la balise fermante
     "explorer.autoReveal": false,
     "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "workbench.tree.indent": 15,
-    "workbench.tree.renderIndentGuides": "always",
-    "workbench.editor.enablePreview": false,
-    "emmet.triggerExpansionOnTab": true,
-    "git.confirmSync": false,
-    "git.enableSmartCommit": true,
-    "workbench.colorTheme": "Tokyo Night",
-    "editor.fontFamily": "'JetBrains Mono', Menlo, Monaco, 'Courier New', monospace, JetBrainsMono Nerd Font Mono",
-    "editor.fontLigatures": true,
-    "workbench.iconTheme": "material-icon-theme",
-    // "editor.lineHeight": 28,
-    "editor.fontSize": 16,
-    "material-icon-theme.hidesExplorerArrows": true,
-    "workbench.colorCustomizations": {
-        "[Tokyo Night]": {
-            "editor.selectionBackground": "#3D59A1",
-            "editor.selectionHighlightBackground": "#3D59A1",
-        }
+    "workbench.editor.enablePreview": false, // Un clic sur un fichier l'ouvre
+    "emmet.triggerExpansionOnTab": true, 
+    // Fichiers
+    "files.autoSave": "onFocusChange",
+    "files.defaultLanguage": "markdown",
+    "files.exclude": {
+      "**/.idea": true
     },
-    "editor.bracketPairColorization.enabled": false,
-    "gitlens.hovers.currentLine.enabled": false,
-    "gitlens.codeLens.enabled": false,
-    "gitlens.hovers.currentLine.over": "line",
-    "multiCommand.commands": [
-        {
-            "command": "multiCommand.makeRoom",
-            "sequence": [
-                "workbench.action.toggleSidebarVisibility",
-                "workbench.action.toggleActivityBarVisibility",
-            ]
-        }
-    ]
+    // Languages
+    "javascript.preferences.importModuleSpecifierEnding": "js",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
 
-    // Vim-AutoSwitch ZH/EN Input
-    "vim.autoSwitchInputMethod.enable": true,
-    "vim.autoSwitchInputMethod.defaultIM": "com.apple.keylayout.US",
-    "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/local/bin/im-select",
-    "vim.autoSwitchInputMethod.switchIMCmd": "/usr/local/bin/im-select {im}"
-}
+  
+    // Extensions
+    "liveServer.settings.donotVerifyTags": true,
+    // Show inline blame at the end of each line
+    "gitlens.currentLine.enabled": true,
+
+    // Show CodeLens (recent changes and authors) above code blocks
+    "gitlens.codeLens.enabled": true,
+
+    // Optional: enable hovers with rich blame info
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.enabled": true,
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "extensions.experimental.affinity": {
+      "asvetliakov.vscode-neovim": 1
+    },
+    "remote.SSH.remotePlatform": {
+      "aisig": "linux",
+      "202.120.32.244 -p 15422": "linux",
+      "impact": "linux"
+    },
+    "explorer.confirmDelete": false,
+    "editor.accessibilitySupport": "off",
+    "remote.autoForwardPortsSource": "hybrid",
+    "workbench.editorAssociations": {
+      "*.pdf": "latex-workshop-pdf-hook"
+    },
+    "[typst]": {
+      "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
+    "[typst-code]": {
+      "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+    },
+    "cursor.cpp.disabledLanguages": [
+      "plaintext",
+      "markdown",
+      "scminput"
+    ],
+    "explorer.confirmPasteNative": false,
+    "redhat.telemetry.enabled": true,
+
+  }
